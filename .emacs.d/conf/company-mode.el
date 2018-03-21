@@ -1,0 +1,6 @@
+;; begin(company-mode)
+(add-to-list 'load-path "~/.emacs.d/plugins/company-mode")
+(autoload 'global-company-mode "company" "Company mode" t)
+;;(setq company-minimum-prefix-length 2)
+(add-hook 'after-init-hook 'global-company-mode)
+;; end(company-mode)

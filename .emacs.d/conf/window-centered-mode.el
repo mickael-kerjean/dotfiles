@@ -1,0 +1,6 @@
+;; begin(window-centered-mode)
+(add-to-list 'load-path "~/.emacs.d/plugins/centered-window-mode")
+(add-to-list 'load-path "~/.emacs.d/plugins/deps/s.el")
+(require 'centered-window-mode)
+(centered-window-mode t)
+;; end(window-centered-mode)

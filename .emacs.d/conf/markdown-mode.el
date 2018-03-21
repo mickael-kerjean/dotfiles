@@ -1,0 +1,7 @@
+;; begin(markdown-mode)
+(autoload 'markdown-mode "markdown-mode" "Markdown mode" t)
+(add-to-list 'load-path "~/.emacs.d/plugins/markdown-mode")
+(add-to-list 'auto-mode-alist '("\.markdown$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\.md$" . markdown-mode))
+(add-hook 'text-mode-hook 'flyspell-mode)
+;; end(tern)

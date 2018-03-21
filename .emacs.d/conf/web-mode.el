@@ -1,0 +1,7 @@
+;; begin(web-mode)
+(add-to-list 'load-path "~/.emacs.d/plugins/web-mode")
+(autoload 'web-mode "web-mode" "Web mode" t)
+(add-to-list 'auto-mode-alist '("\.scss$" . css-mode))
+(add-to-list 'auto-mode-alist '("\.less$" . css-mode))
+(add-hook 'html-mode-hook 'web-mode)
+;; end(web-mode)

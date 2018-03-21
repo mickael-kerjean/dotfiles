@@ -1,0 +1,5 @@
+;; begin(undo-tree)
+(add-to-list 'load-path "~/.emacs.d/plugins/undo-tree")
+(global-set-key (kbd "C-c C-z") 'undo-tree-visualize)
+(autoload 'undo-tree-visualize "undo-tree" "undo-tree mode" t)
+;; end(undo-tree)

@@ -1,0 +1,7 @@
+;; begin(magit)
+(autoload 'magit-status "magit" "Magit mode" t)
+(add-to-list 'load-path "~/.emacs.d/plugins/magit/lisp")
+(add-to-list 'load-path "~/.emacs.d/plugins/deps/dash.el")
+(add-to-list 'load-path "~/.emacs.d/plugins/deps/with-editor")
+(global-set-key (kbd "C-c g") 'magit-status)
+;; end(magit)

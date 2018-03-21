@@ -1,0 +1,213 @@
+#############
+# DEFAULT
+set $mod Mod4
+font pango:System San Francisco Display Regular Display 12, Fontawesome 12
+floating_modifier $mod
+
+gaps inner 8
+gaps outer 2
+
+#############
+# THEMING
+set $bg-color            #385880
+set $border-color        #3fa7ba
+Set $inactive-bg-color   #242424
+set $text-color          #f6f3e8
+set $inactive-text-color #99968b
+set $urgent-bg-color     #E53935
+
+# window
+# color             border                  background          text                       border
+client.focused		$border-color           $bg-color           $text-color             $border-color
+client.unfocused	$inactive-bg-color      $inactive-bg-color	$inactive-text-color    $border-color
+client.focused_inactive	$inactive-bg-color	$inactive-bg-color	$inactive-text-color    $border-color
+client.urgent		$urgent-bg-color        $urgent-bg-color	$text-color             $border-color
+
+new_window pixel 3
+hide_edge_borders vertical
+
+floating_maximum_size 1200x800
+workspace_auto_back_and_forth yes
+focus_on_window_activation smart
+
+
+#############
+# LOAD
+exec --no-startup-id compton --xrender-sync-fence -f
+exec --no-startup-id feh --bg-scale ~/Pictures/background.png
+exec --no-startup-id polybar top
+exec --no-startup-id nm-applet
+exec --no-startup-id syncthing
+exec --no-startup-id redshift-gtk
+exec --no-startup-id dunst
+exec --no-startup-id blueberry-tray
+
+
+#############
+# BINDING
+
+# start a terminal
+bindsym $mod+Return exec urxvt
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+space exec "rofi -combi-modi window,drun -show combi"
+
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Tab focus left
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# move workspace
+bindsym $mod+Shift+Left move workspace to left
+bindsym $mod+Shift+Right move workspace to right
+
+# split orientation
+bindsym $mod+minus split v
+bindsym $mod+Shift+bar split h
+
+
+# fullscreen
+bindsym F11 fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+s sticky toggle
+bindsym $mod+e layout toggle split
+bindsym $mod+s scratchpad show
+bindsym $mod+Shift+s move scratchpad
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Ctrl+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+
+# switch to workspace
+set $ws1    1
+set $ws2    2
+set $ws3    3
+set $ws4    4
+set $ws5    5
+set $ws6    6
+set $ws7    7
+set $ws8    8
+set $ws9    9
+set $ws10   10
+#
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Escape exec i3lock-fancy
+# scrot /tmp/screen.png && i3lock --textcolor=00000000 --insidecolor=0000001c --ringcolor=0000003e --linecolor=00000000 --keyhlcolor=ffffff80 --ringvercolor=ffffff00 --insidevercolor=ffffff1c -c 272727 -i /tmp/screen.png
+
+##############
+# EXIT MODE
+bindsym $mod+Shift+e exec i3-msg exit
+
+set $exit_mode "[l]ogout [p]oweroff [r]eboot [s]uspend"
+bindsym $mod+q mode $exit_mode
+mode $exit_mode {
+  bindsym l exec --no-startup-id "i3-msg mode default; i3-msg exit;"
+  bindsym p exec --no-startup-id "i3-msg mode default; poweroff"
+  bindsym r exec --no-startup-id "i3-msg mode default; reboot"
+  bindsym s exec --no-startup-id "i3-msg mode default; i3lock-fancy"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+
+##############
+# RESIZE MODE
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 2 px or 2 ppt
+        bindsym Down resize grow height 2 px or 2 ppt
+        bindsym Up resize shrink height 2 px or 2 ppt
+        bindsym Right resize grow width 2 px or 2 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl list short sinks | awk '{print $1}' | xargs -I {} pactl set-sink-volume {} +5% && notify-send.sh --replace-file=/tmp/notification-volume "Volume: `pactl list sinks | grep Volume | head -n 1 | awk '{print $5}'`" #increase volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl list short sinks | awk '{print $1}' | xargs -I {} pactl set-sink-volume {} -5% && notify-send.sh --replace-file=/tmp/notification-volume "Volume: `pactl list sinks | grep Volume | head -n 1 | awk '{print $5}'`" #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl list short sinks | awk '{print $1}' | xargs -I {} pactl set-sink-mute {} toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 15 && value=`cat /sys/class/backlight/intel_backlight/actual_brightness` && notify-send.sh --replace-file=/tmp/notification-brightness "Brightness: `expr 100 \* $value / 852`%" # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 8 && value=`cat /sys/class/backlight/intel_backlight/actual_brightness` && notify-send.sh --replace-file=/tmp/notification-brightness "Brightness: `expr 100 \* $value / 852`%" # increase screen brightness
+
+bindsym Print exec scrot -u ~/Desktop/screenshot_`date +%Y%m%d_%H%M%S`.png # take a screenshot of current screen
+bindsym Shift+Print exec scrot ~/Desktop/screenshot_`date +%Y%m%d_%H%M%S`.png # take a screenshot
+
+
+#############
+# APPLICATION
+
+#assign [class="Emacs"]		$ws1
+#assign [class="Chromium"]	$ws3
+#assign [class="Firefox"]	$ws3
+#assign [class="Gimp"]      $ws6
+#assign [class="Nautilus"]   $ws8
+assign [class="Evolution"]  $ws9
+#assign [class="Rhythmbox"]     $ws10
+
+for_window [class="[.]*"] focus
+for_window [class=".*"] title_format " %title"
+for_window [class="qutebrowser"]  sticky enable
+for_window [class="gsimplecal"]  move position center
+for_window [class="Gimp"]  move position center
