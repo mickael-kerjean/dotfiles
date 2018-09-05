@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Music
+GenericName=Music
+Exec=/home/mickael/Documents/apps/music-linux-x64
+Icon=chromium
+Type=Application
+Terminal=false
+Categories=Network;WebBrowser;
+Keywords=Browser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
