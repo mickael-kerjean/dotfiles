@@ -20,6 +20,23 @@
             (local-set-key (kbd "C-h") 'xwidget-webkit-browse-history)
             (local-set-key (kbd "C-e") 'xwidget-webkit-edit-mode)))
 
+(defun my/browser-open-at-point (url)
+  (interactive "surl: ")
+  (let ((url (thing-at-point 'url)))
+    (xwidget-webkit-browse-url url t)))
+
+(defun my/browser-google (query)
+  (interactive "ssearch: ")
+  (xwidget-webkit-browse-url
+   (concat "https://google.com/search?q=" (string-replace " " "%20" query)) t))
+
+(global-set-key (kbd "C-c o o") 'my/browser-open-at-point)
+(global-set-key (kbd "C-c o g") 'my/browser-google)
+(global-set-key (kbd "C-c o h") (lambda () (interactive)(xwidget-webkit-browse-url "http://news.ycombinator.com" t)))
+
+(global-set-key (kbd "C-c o f c") (lambda () (interactive)(eww "https://pages.kerjean.me/projects/filestash/logs/?key=mickael")))
+(global-set-key (kbd "C-c o f i") (lambda () (interactive)(eww "https://support.filestash.app")))
+
 (defun browse-url-interactive-arg (prompt)
   "fix the existing emacs version by adding the current url by default"
   (let ((event (elt (this-command-keys) 0)))
@@ -37,33 +54,3 @@
 		  (browse-url-url-at-point)))
 	    (not (eq (null browse-url-new-window-flag)
 		         (null current-prefix-arg)))))
-
-
-
-;; (require 'hydra)
-
-;; (defun my/browser-open-at-point (&optional arg)
-;;   (interactive)
-;;   (let ((url (thing-at-point 'url)))
-;;     (xwidget-webkit-browse-url
-;;      (if url url (read-string "url: " "")) t)))
-
-;; (defun my/browser-google (&optional arg)
-;;   (interactive)
-;;   (xwidget-webkit-browse-url
-;;    (concat "https://google.com/search?q=" (string-replace " " "%20" (read-string "search: " ""))) t))
-
-;; (defhydra hydra-internet (:color blue :hint nil)
-;;   "
-;; webkit    : _o_pen _g_oogle _h_n
-;; filestash : _c_ontact c_a_lendar #_f_ilestash #filestash-_d_ev
-;; "
-;;   ("o" (my/browser-open-at-point))
-;;   ("g" (my/browser-google))
-;;   ("h" (xwidget-webkit-browse-url "http://news.ycombinator.com" t))
-;;   ("c" (eww "https://pages.kerjean.me/projects/filestash/logs/?key=mickael"))
-;;   ("a" (xwidget-webkit-browse-url "https://calendar.google.com/calendar/u/0/r" t))
-;;   ("f" (eww "https://support.filestash.app"))
-;;   ("d" (eww "https://support.filestash.app/logs/%23filestash-dev/")))
-
-;; (global-set-key (kbd "C-c o") 'hydra-internet/body)

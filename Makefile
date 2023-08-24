@@ -1,2 +1,2 @@
 install:
-	rsync -a .emacs.d/ ~/
+	rsync -Ra .emacs.d/ ~/

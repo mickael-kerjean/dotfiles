@@ -153,6 +153,7 @@
 ;; faster to quit
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq kill-buffer-query-functions nil)
+(global-set-key (kbd "C-x C-c") 'kill-emacs)
 
 ;; highlight selected text
 (transient-mark-mode t)
@@ -181,9 +182,9 @@
 
 ;; track recently opened file
 (recentf-mode t)
-(global-set-key (kbd "C-c C-r") 'recentf-open-files)
 (setq recentf-max-saved-items 1000)
 (setq recentf-max-menu-items 50)
+(global-set-key (kbd "C-x C-r") '(lambda () (interactive)(find-file (ido-completing-read "Find recent file: " recentf-list))))
 
 ;; display pictures and other compressed files
 (setq auto-image-file-mode t)
@@ -217,14 +218,13 @@
 (setq scroll-margin 7)
 (setq scroll-conservatively 5)
 
-;; ;; indentation
+;; indentation
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq standard-indent 4)
 (setq tab-width 4)
 (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80))
 (setq indent-tabs-mode nil)
-;; (setq indent-line-function 'insert-tab)
 
 ;; disable backup files
 (setq make-backup-files nil)
@@ -293,6 +293,7 @@
 ;; better default for pdf reading
 (setq pdf-view-use-scaling t)
 (setq doc-view-resolution 300)
+
 
 ;; -------------------------------------------------------------------------------------
 ;; ---------------------      PLUGINS          -----------------------------------------
