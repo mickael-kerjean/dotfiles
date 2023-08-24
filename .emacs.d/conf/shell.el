@@ -1,4 +1,10 @@
+;; terminal
+;; (autoload 'vterm "vterm" "vterm" t)
+;; (require 'vterm)
+;; (setq vterm-buffer-name-string "term: %s")
+
 ;; eshell
+(setq eshell-buffer-name "*eshell*")
 (setq eshell-banner-message "")
 (setq eshell-prompt-function (lambda nil (concat
                                           (propertize (string-replace (concat (getenv "HOME") "/") "~/" (eshell/pwd))

@@ -10,7 +10,7 @@
 (global-set-key (kbd "C-c b") 'eww)
 
 ;; webkit
-(setq xwidget-webkit-buffer-name-format "*webkit*: [%T] - %U")
+(setq xwidget-webkit-buffer-name-format "*webkit* [%T] - %U")
 (add-hook 'xwidget-webkit-mode-hook
           (lambda ()
             (setq kill-buffer-query-functions nil)
@@ -20,22 +20,58 @@
             (local-set-key (kbd "C-h") 'xwidget-webkit-browse-history)
             (local-set-key (kbd "C-e") 'xwidget-webkit-edit-mode)))
 
+
 (defun my/browser-open-at-point (url)
-  (interactive "surl: ")
-  (let ((url (thing-at-point 'url)))
-    (xwidget-webkit-browse-url url t)))
+  (interactive
+   (list (let ((url (thing-at-point 'url)))
+           (if (equal major-mode 'xwidget-webkit-mode)
+               (read-string "url: " (xwidget-webkit-uri (xwidget-webkit-current-session)))
+             (read-string "url: " url)))))
+  (xwidget-webkit-browse-url url t))
 
 (defun my/browser-google (query)
   (interactive "ssearch: ")
   (xwidget-webkit-browse-url
    (concat "https://google.com/search?q=" (string-replace " " "%20" query)) t))
 
-(global-set-key (kbd "C-c o o") 'my/browser-open-at-point)
-(global-set-key (kbd "C-c o g") 'my/browser-google)
-(global-set-key (kbd "C-c o h") (lambda () (interactive)(xwidget-webkit-browse-url "http://news.ycombinator.com" t)))
+(defun my/browser-bookmark (url)
+  (interactive (list (completing-read
+                "bookmark: "
+                (list
+                 ;; common
+                 "https://youtube.com"
+                 "https://reddit.com/r/selfhosted"
+                 "https://ebay.fr"
+                 "https://news.ycombinator.com"
+                 "https://google.com"
+                 "https://calendar.google.com"
+                 ;; news
+                 "https://lefigaro.fr"
+                 "https://www.lindependant.fr"
+                 ;; filestash
+                 "https://stripe.com"
+                 "https://wise.com"
+                 "https://github.com/mickael-kerjean/filestash"
+                 "https://console.hetzner.cloud"
+                 "https://console.aws.amazon.com"
+                 "https://search.google.com/search-console"
+                 "https://pages.kerjean.me/projects/filestash/logs/?key=mickael"
+                 "https://support.filestash.app"
+                 ) nil nil "https://")))
+  (xwidget-webkit-browse-url url t))
 
-(global-set-key (kbd "C-c o f c") (lambda () (interactive)(eww "https://pages.kerjean.me/projects/filestash/logs/?key=mickael")))
-(global-set-key (kbd "C-c o f i") (lambda () (interactive)(eww "https://support.filestash.app")))
+(global-set-key (kbd "C-c o o") 'my/browser-open-at-point)
+(global-set-key (kbd "C-c o n") 'my/browser-bookmark)
+(global-set-key (kbd "C-c o g") 'my/browser-google)
+
+(global-set-key (kbd "C-c o f") (lambda ()
+                                  (interactive)
+                                  (eww (completing-read
+                                        "[filestash]: "
+                                        (list
+                                         "https://pages.kerjean.me/projects/filestash/logs/?key=mickael"
+                                         "https://support.filestash.app")
+                                        nil t "https://"))))
 
 (defun browse-url-interactive-arg (prompt)
   "fix the existing emacs version by adding the current url by default"

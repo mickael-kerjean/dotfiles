@@ -1,8 +1,3 @@
-;; terminal
-;; (autoload 'vterm "vterm" "vterm" t)
-;; (require 'vterm)
-;; (setq vterm-buffer-name "term: %s")
-
 ;; autocompletion
 (require 'lsp-mode)
 (setq lsp-headerline-breadcrumb-enable nil)
