@@ -15,6 +15,10 @@
  ;; company-auto-complete 'company-explicit-action-p
  company-tooltip-minimum-width 40)
 
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "<return>") nil)
+  (define-key company-active-map (kbd "RET") nil)
+  (define-key company-active-map (kbd "<tab>") #'company-complete-selection))
 
 ;; seen from the doc
 (setq gc-cons-threshold 100000000)
