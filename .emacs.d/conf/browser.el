@@ -41,13 +41,16 @@
                  ;; common
                  "https://youtube.com"
                  "https://reddit.com/r/selfhosted"
+                 "https://reddit.com/r/emacs"
                  "https://ebay.fr"
                  "https://news.ycombinator.com"
                  "https://google.com"
                  "https://calendar.google.com"
                  ;; news
                  "https://lefigaro.fr"
-                 "https://www.lindependant.fr"
+                 "https://lindependant.fr"
+                 "https://lemonde.fr"
+                 "https://liberation.fr"
                  ;; filestash
                  "https://stripe.com"
                  "https://wise.com"
