@@ -28,7 +28,7 @@
 (setq my/theme-green "#a7d864")
 (setq my/theme-fushia "#9ac9c4")
 (setq my/theme-blue "#8bc4ee")
-(setq my/theme-green-dark "#758250")
+(setq my/theme-green-dark "#8c9c60") ;; #758250
 
 
 ;; ;; light theme
