@@ -43,6 +43,7 @@
                  "https://reddit.com/r/selfhosted"
                  "https://reddit.com/r/emacs"
                  "https://ebay.fr"
+                 "https://ebay.com.au"
                  "https://news.ycombinator.com"
                  "https://google.com"
                  "https://calendar.google.com"
@@ -60,6 +61,11 @@
                  "https://search.google.com/search-console"
                  "https://pages.kerjean.me/projects/filestash/logs/?key=mickael"
                  "https://support.filestash.app"
+                 ;;
+                 "https://forumamontres.forumactif.com/f49-forum-yema"
+                 "https://cda.chronomania.net/forum.php"
+                 "http://127.0.0.1:5050/?q=yema%20superman"
+                 "http://127.0.0.1:5050/?q=yema&category=281"
                  ) nil nil "https://")))
   (xwidget-webkit-browse-url url t))
 

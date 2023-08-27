@@ -123,7 +123,7 @@
  '(message-header-other ((t (:inherit 'default :foreground nil))))
  '(message-header-subject ((t (:inherit 'default :foreground nil))))
  '(message-header-to ((t (:inherit 'default :foreground nil))))
- '(message-separator ((t (:inherit font-lock-comment-face :foreground "red" :weight bold))))
+ '(message-separator ((t (:inherit font-lock-comment-face :foreground nil :weight bold))))
  '(mode-line ((t (:inherit 'default :background "#35383c" :foreground "#eaebec" :reverse-video nil :overline nil :box (:line-width (1 . 2) :color "#35383c")))))
  '(mode-line-inactive ((t (:inherit 'default :foreground "#a4a9af" :background "#35383c" :overline nil :box (:line-width (1 . 2) :color "#35383c")))))
  '(success ((t (:inherit 'font-lock-keyword-face))))
