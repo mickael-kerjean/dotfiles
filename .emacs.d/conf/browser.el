@@ -40,8 +40,8 @@
                 (list
                  ;; common
                  "https://youtube.com"
-                 "https://reddit.com/r/selfhosted"
-                 "https://reddit.com/r/emacs"
+                 "https://old.reddit.com/r/selfhosted"
+                 "https://old.reddit.com/r/emacs"
                  "https://ebay.fr"
                  "https://ebay.com.au"
                  "https://news.ycombinator.com"

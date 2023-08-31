@@ -84,7 +84,7 @@
  '(erc-direct-msg-face ((t (:inherit 'font-lock-warning-face))))
  '(erc-err-face ((t (:inherit 'font-lock-comment-face))))
  '(erc-error-face ((t (:inherit 'font-lock-warning-face))))
- '(erc-input-face ((t (:inherit 'font-lock-warning-face))))
+ '(erc-input-face ((t (:inherit 'default))))
  '(erc-my-nick-face ((t (:inherit 'default))))
  '(erc-nick-default-face ((t (:inherit 'font-lock-comment-face))))
  '(erc-nick-msg-face ((t (:inherit 'font-lock-comment-face))))
@@ -241,14 +241,32 @@
 (ido-everywhere t)
 (setq ido-enable-flex-matching t)
 (setq resize-mini-windows t)
-(add-hook 'minibuffer-setup-hook
-      (lambda () (setq truncate-lines nil)))
 (setq ido-decorations '("\n-> " "" "\n   " "\n   ..."
             "[" "]" " [No match]" " [Matched]"
             " [Not readable]" " [Too big]" " [Confirm]"))
-(add-to-list 'ido-ignore-buffers "*Messages*")
-(add-to-list 'ido-ignore-buffers "*Buffer*")
-(add-to-list 'ido-ignore-buffers "*Help*")
+
+(setq ido-ignore-modes (list "minibuffer-inactive-mode" "messages-buffer-mode" "completion-list-mode" "Buffer-menu-mode" "special-mode" "help-mode" "debugger-mode" "fundamental-mode" "lisp-interaction-mode" "erc-mode" "erc-status-sidebar-mode" "magit-status-mode"))
+(setq ido-ignore-buffers (list "\\` " #'(lambda (name) (member (symbol-name (with-current-buffer name major-mode)) ido-ignore-modes))))
+
+(add-hook 'minibuffer-setup-hook (lambda () (setq truncate-lines nil)))
+
+(defun my/ido-switch-buffer-mode (mode)
+  (interactive
+   (list (ido-completing-read
+    "Mode: "
+    (delete-dups
+     (cl-remove-if-not
+      (lambda (name) (not (member name ido-ignore-modes)))
+      (mapcar '(lambda (name) (symbol-name (with-current-buffer name major-mode))) (buffer-list))))
+    nil t)))
+
+  (switch-to-buffer (ido-completing-read
+   "Buffer: "
+   (cl-remove-if-not
+    (lambda (name) (string-match-p mode (symbol-name (with-current-buffer name major-mode))))
+    (mapcar #'buffer-name (buffer-list)))
+   nil t)))
+(global-set-key (kbd "C-x B") 'my/ido-switch-buffer-mode)
 
 ;; other usefull shortcuts
 (global-set-key (kbd "C-c s") 'eshell)
