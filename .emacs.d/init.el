@@ -103,7 +103,7 @@
  '(gnus-cite-attribution ((t (:inherit font-lock-comment-face :slant italic))))
  '(gnus-group-mail-1 ((t (:inherit 'font-lock-default-face))))
  '(gnus-group-mail-1-empty ((t (:inherit 'default))))
- '(gnus-group-mail-2 ((t (:inherit 'font-lock-default-face))))
+ '(gnus-group-mail-2 ((t (:inherit 'font-lock-keyword-face :foreground nil :weight bold))))
  '(gnus-group-mail-2-empty ((t (:inherit 'default))))
  '(gnus-group-mail-3 ((t (:foreground nil :weight bold))))
  '(gnus-group-mail-3-empty ((t (:inherit 'font-lock-default-face))))
