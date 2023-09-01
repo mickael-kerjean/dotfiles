@@ -200,9 +200,10 @@
 (global-set-key (kbd "C-c C-c") 'hs-toggle-hiding)
 (add-hook 'prog-mode-hook #'(lambda () (hs-minor-mode t) ))
 
-;; Search using regexp
-(global-set-key "\C-s" 'isearch-forward-regexp)
-(global-set-key "\C-r" 'isearch-backward-regexp)
+;; override better default
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Usable on OSX and windows
 (setq mac-command-modifier 'meta)
